@@ -6,6 +6,11 @@ export default {
     ],
     theme: {
       extend: {
+        backgroundImage: theme => ({
+          'hero-pattern': "url('/img/hero-pattern.svg')",
+          'space': "url('/src/assets/images/space.jpg')",
+        }),
+
         colors: {
           gray: {
             200: "#D5DAE1"
