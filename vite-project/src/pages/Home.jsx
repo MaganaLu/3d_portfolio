@@ -1,4 +1,4 @@
-import React, { Suspense, useState } from 'react'
+import React, { Suspense, useEffect, useRef, useState } from 'react'
 import {Canvas} from '@react-three/fiber'
 import Loader from '../components/Loader'
 
@@ -8,11 +8,10 @@ import Globe from '../models/globe';
 import Rocket from '../models/Rocket';
 
 function Home() {
-  const [isRotating, setIsRotating ] = useState(false);
-
+  const [isRotating, setIsRotating] = useState(false);
   const adjustIslandForScreenSize = () =>{
   let screenScale= null;
-  let screenPosition = [0,-.9, 2];
+  let screenPosition = [0, 0, 2.7];
   let rotation = [0.1,9.2, 0];
 
   if(window.innerWidth < 768){
@@ -42,9 +41,11 @@ function Home() {
 
 
   return (
-    <section className= 'w-full h-screen relative'>
+    <section className= 'bg-space w-full h-screen relative'>
       <Canvas 
-        className={'bg-space w-full h-screen bg-transparent ${isRotating ? cursor-grabbing : cursor-grab}'}
+        className={`w-full h-screen bg-transparent ${
+          !isRotating ?  "cursor-grabbing" :"cursor-grab"
+        }`}
         camera={{near: 0.1, far:1000}}
         >
           <Suspense fallback={<Loader />}>
@@ -55,7 +56,7 @@ function Home() {
             <Globe
             position={islandPosition}
             scale= {islandScale}
-            rotation = {islandRotation}
+            rotation = {[0.1,9.2, 0]}
             isRotating = {isRotating}
             setIsRotating = {setIsRotating}
             />

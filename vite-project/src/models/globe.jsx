@@ -23,13 +23,13 @@ const Globe = ({ isRotating, setIsRotating, setCurrentStage, currentFocusPoint, 
     const rotationSpeed = useRef(0);
     const dampingFactor = 0.95;
 
-    const handlePointerDown = (e) => {
-        e.stopPropagation();
-        e.preventDefault();
+    const handlePointerDown = (event) => {
+        event.stopPropagation();
+        event.preventDefault();
         setIsRotating(true);
 
         // Calculate the clientX based on whether it's a touch event or a mouse event
-    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientX = event.touches ? event.touches[0].clientX : event.clientX;
 
     // Store the current clientX position for reference
     lastX.current = clientX;
@@ -39,7 +39,7 @@ const Globe = ({ isRotating, setIsRotating, setCurrentStage, currentFocusPoint, 
         e.stopPropagation();
         e.preventDefault();
         setIsRotating(false);
-    }
+    };
 
     const handlePointerMove = (e) => {
         e.stopPropagation();
@@ -54,7 +54,7 @@ const Globe = ({ isRotating, setIsRotating, setCurrentStage, currentFocusPoint, 
       const delta = (clientX - lastX.current) / viewport.width;
 
       // Update the island's rotation based on the mouse/touch movement
-      globeRef.current.rotation.y += delta * 0.01 * Math.PI;
+      globeRef.current.rotation.y += delta * 0.01  * Math.PI;
 
       // Update the reference for the last clientX position
       lastX.current = clientX;
@@ -62,40 +62,44 @@ const Globe = ({ isRotating, setIsRotating, setCurrentStage, currentFocusPoint, 
       // Update the rotation speed
       rotationSpeed.current = delta * 0.01 * Math.PI;
         }
-    }
+    };
 
-    const handleKeyDown = (e) => {
-        if (e.key === 'ArrowLeft') {
+    const handleKeyDown = (event) => {
+        if (event.key === "ArrowLeft") {
             if (!isRotating) setIsRotating(true);
-            globeRef.current.rotation.y += 0.01 * Math.PI;
-        } else if (e.key === 'ArrowRight') {
+      
+            globeRef.current.rotation.y += 0.005 * Math.PI;
+            rotationSpeed.current = 1/820;
+          } else if (event.key === "ArrowRight") {
+            console.log("pushed right arrow");
             if (!isRotating) setIsRotating(true);
-            globeRef.current.rotation.y -= 0.01 * Math.PI;
-        }
-    }
+      
+            globeRef.current.rotation.y -= 0.005 * Math.PI;
+            rotationSpeed.current = -0.007;
+          }
+    };
 
-    const handleKeyUp = (e) => {
-        if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+    const handleKeyUp = (event) => {
+        if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
             setIsRotating(false);
         }
-    }
+    };
 
     useFrame(() => {
         if (!isRotating) {
             rotationSpeed.current *= dampingFactor;
 
-            if(Math.abs(rotationSpeed.current) < 0.001){
+            if(Math.abs(rotationSpeed.current) < .001){
                 rotationSpeed.current = 0;
             }
 
-            if (Math.abs(rotationSpeed.current) < 0.001) {
-                rotationSpeed.current = 0;
-            }
+            globeRef.current.rotation.y += rotationSpeed.current;
         } else {
+            console.log("got here");
             const rotation = globeRef.current.rotation.y;
 
             const normalizedRotation =
-                ((rotation % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
+                ((rotation % (1/820 * Math.PI)) + 1/820 * Math.PI) % (1/820 * Math.PI);
 
             // Set the current stage based on the island's orientation
             switch (true) {
@@ -115,34 +119,32 @@ const Globe = ({ isRotating, setIsRotating, setCurrentStage, currentFocusPoint, 
                     setCurrentStage(null);
             }
         }
-    })
+    });
 
     useEffect(() => {
         const canvas = gl.domElement;
-        canvas.addEventListener('pointerdown', handlePointerDown);
-        canvas.addEventListener('pointerup', handlePointerUp);
+        canvas.addEventListener('pointerdown', handlePointerUp);
+        canvas.addEventListener('pointerup', handlePointerDown);
         canvas.addEventListener('pointermove', handlePointerMove);
-        document.addEventListener('keydown', handleKeyDown);
-        document.addEventListener('keyup', handleKeyUp);
+        document.addEventListener('keydown', handleKeyUp);
+        document.addEventListener('keyup', handleKeyDown);
         return () => {
-            canvas.addEventListener('pointerdown', handlePointerDown);
-            canvas.addEventListener('pointerup', handlePointerUp);
+            canvas.addEventListener('pointerdown', handlePointerUp);
+            canvas.addEventListener('pointerup', handlePointerDown);
             canvas.addEventListener('pointermove', handlePointerMove);
-            document.addEventListener('keydown', handleKeyDown);
-            document.addEventListener('keyup', handleKeyUp);
-        }
+            document.addEventListener('keydown', handleKeyUp);
+            document.addEventListener('keyup', handleKeyDown);
+        };
 
-    }, [gl, handlePointerDown, handlePointerUp, handlePointerMove])
+    }, [gl,handlePointerUp,handlePointerDown, handlePointerMove])
 
     return (
-        <a.group ref={globeRef} {...props} dispose={null}>
+        <a.group ref={globeRef} {...props}>
             <mesh
-                castShadow
-                receiveShadow
                 geometry={nodes.Object_Planet_0.geometry}
                 material={materials.Planet}
-                position={[-0.045, 1.247, 0.066]}
-                rotation={[Math.PI, 0, Math.PI]}
+                //position={[-0.045, 1.247, 0.066]}
+                //rotation={[Math.PI, 0, Math.PI]}
             />
         </a.group>
     );
