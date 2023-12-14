@@ -67,9 +67,12 @@ const Globe = ({ isRotating, setIsRotating, setCurrentStage, currentFocusPoint, 
     const handleKeyDown = (event) => {
         if (event.key === "ArrowLeft") {
             if (!isRotating) setIsRotating(true);
-      
+            while(isRotating){
+
+            
             globeRef.current.rotation.y += 0.005 * Math.PI;
-            rotationSpeed.current = 1/820;
+            rotationSpeed.current = 1;
+            }
           } else if (event.key === "ArrowRight") {
             console.log("pushed right arrow");
             if (!isRotating) setIsRotating(true);
