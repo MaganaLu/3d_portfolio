@@ -6,7 +6,6 @@ import eyeScene from '../assets/3d/RedBlob.glb'
 import { useFrame, useThree } from "@react-three/fiber";
 
 const Eye = ({ isRotating, setIsRotating, setCurrentStage, currentFocusPoint, ...props }) => {
-
     const meshRef = useRef();
 
     const { gl, viewport } = useThree();
@@ -35,23 +34,22 @@ const Eye = ({ isRotating, setIsRotating, setCurrentStage, currentFocusPoint, ..
       }
 
     return (
-        <a.group {...props}>
+        <a.group ref={meshRef} {...props}>
         <group scale={0.01}>
-          <group ref={meshRef} scale={100}>
+          <group  ref={meshRef} scale={100}>
             <mesh 
               //castShadow
               //receiveShadow
               geometry={nodes.Eye_Flesh_0.geometry}
               material={materials["Flesh.001"]}
-              
             />
-            <mesh 
+            <mesh  
               //castShadow
               //receiveShadow
               geometry={nodes.Eyeball.geometry}
               material={materials["material.001"]}
               //rotation={eyeBallRotation}
-              //rotation={[0.007, 0, -Math.PI]}
+              rotation={[1.007, 0, -Math.PI]}
             />
           </group>
           <mesh

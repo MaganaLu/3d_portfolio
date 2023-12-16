@@ -11,14 +11,19 @@ import DemonBoy from '../models/DemonBoy';
 import Bat from '../models/Bat';
 import DemonEyeball from '../models/DemonEye';
 import RedBlob from '../models/RedBlob';
+import RedEyeScocket from '../models/RedEyeSocket';
+import RedEyeBall from '../models/RedEyeBall';
+import PigeonEyes from '../models/PigeonEyes';
+import PigeonBody from '../models/PigeonBody';
+
 //import RedBlob2 from '../models/RedBlob2';
 
 function Home() {
   const [isRotating, setIsRotating] = useState(false);
   const adjustIslandForScreenSize = () =>{
   let screenScale= null;
-  let screenPosition = [0, 0, 3];
-  let rotation = [1.5, 0, 0];
+  let screenPosition = [-1, -1, -1];
+  let rotation = [0, -1.5, 0];
 
   if(window.innerWidth < 768){
     screenScale = [0.9, 0.9, 0.9];
@@ -32,11 +37,11 @@ function Home() {
     let screenScale, screenPosition;
   
     if(window.innerWidth < 768){
-      screenScale = [.9, .9, 0.9];
-      screenPosition=[2,-.9, 2];
+      screenScale = [1, 1, 1];
+      screenPosition=[2,0, 2];
     }else{
-      screenScale = [.25,.25,.25];
-      screenPosition = [0.02,.43,2.53];
+      screenScale = [1,1,1];
+      screenPosition = [-1.23,-1.55,-1];
     }
     return [screenScale, screenPosition]
     }
@@ -45,9 +50,9 @@ function Home() {
 
   const [rocketScale, rocketPosition] = adjustRocketForScreenSize();
 
-
+    
   return (
-    <section className= 'bg-space w-full h-screen relative'>
+    <section className= 'bg-brick-wall w-full h-screen relative'>
       <Canvas 
         className={`w-full h-screen bg-transparent ${
           !isRotating ?  "cursor-grabbing" :"cursor-grab"
@@ -55,12 +60,12 @@ function Home() {
         camera={{near: 0.1, far:1000}}
         >
           <Suspense fallback={<Loader />}>
-            <directionalLight position={[0,-2,1]} intensity={2}/>
-            <ambientLight intensity={.5}/>
+            <ambientLight intensity={.9}/>
             
+            <directionalLight color={'#e9e0c9'} position={[0,-1.5,2]} intensity={2}/>
+           
             
-            
-            
+             {/*
             <RedBlob
             position={islandPosition}
             scale= {islandScale}
@@ -68,8 +73,32 @@ function Home() {
             isRotating = {isRotating}
             setIsRotating = {setIsRotating}
             />
+            */}
+            <PigeonEyes
+            position={rocketPosition}
+            scale= {rocketScale}
+            rotation = {[1.1,-1.5,1]}
+            isRotating = {isRotating}
+            setIsRotating = {setIsRotating}
+            />
 
-            {/*
+            <PigeonBody
+            position={islandPosition}
+            scale= {islandScale}
+            rotation = {islandRotation}
+            isRotating = {isRotating}
+            setIsRotating = {setIsRotating}
+            />
+{/* 
+            <RedEyeBall
+            position={rocketPosition}
+            scale= {rocketScale}
+            rotation = {[1.5,0.1,0]}
+            isRotating = {isRotating}
+            setIsRotating = {setIsRotating}
+            />
+            
+           
             <Bat
             position={islandPosition}
             scale= {islandScale}
@@ -86,7 +115,6 @@ function Home() {
             setIsRotating = {setIsRotating}
             />
             
-          
             <Rocket
             isRotating={isRotating}
             scale = {rocketScale}

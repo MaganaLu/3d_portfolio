@@ -9,6 +9,7 @@ export default {
         backgroundImage: theme => ({
           'hero-pattern': "url('/img/hero-pattern.svg')",
           'space': "url('/src/assets/images/space.jpg')",
+          'brick-wall':"url('/src/assets/images/brickwall.jpg')",
         }),
 
         colors: {
