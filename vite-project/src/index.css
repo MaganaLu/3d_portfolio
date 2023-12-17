@@ -10,7 +10,8 @@
 }
 
 body {
-  font-family: "Work Sans", sans-serif;
+  font-family: 'font-sans';
+  background-color: black;
 }
 
 body:has(.card[data-color="blue"]:hover) {

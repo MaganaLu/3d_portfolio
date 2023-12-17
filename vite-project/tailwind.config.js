@@ -10,6 +10,8 @@ export default {
           'hero-pattern': "url('/img/hero-pattern.svg')",
           'space': "url('/src/assets/images/space.jpg')",
           'brick-wall':"url('/src/assets/images/brickwall.jpg')",
+          'PCScene':"url('/src/assets/images/PCScene.png')",
+          'PCScene2':"url('src/assets/images/PCScene2.png')",
         }),
 
         colors: {

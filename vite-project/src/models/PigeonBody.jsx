@@ -35,38 +35,44 @@ const PigeonBody = ({ isRotating, setIsRotating, setCurrentStage, currentFocusPo
     return (
         <a.group ref={eyeRef} {...props}>
         <group
-          position={[0, 0.587, 0.436]}
-          rotation={[Math.PI / 2, 0, 0]}
-          scale={0.01}
-        >
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.Object_13.geometry}
-            material={materials["pecho.002"]}
-          />
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.Object_14.geometry}
-            material={materials["patas_y_pico.002"]}
-          />
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.Object_15.geometry}
-            material={materials["deesc.005"]}
-          />
-        </group>
+        position={[0, 0.587, 0.436]}
+        rotation={[Math.PI / 2, 0, 0]}
+        scale={0.01}
+      >
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.Object_8.geometry}
-          material={materials["deesc.004"]}
-          position={[0.845, -0.565, -0.245]}
-          rotation={[Math.PI / 2, 0, 0]}
-          scale={0.01}
+          geometry={nodes.Object_13.geometry}
+          material={materials.pecho}
         />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Object_14.geometry}
+          material={materials.patas_y_pico}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Object_15.geometry}
+          material={materials["deesc.001"]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Object_16.geometry}
+          material={materials.cuello}
+        />
+      </group>
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Object_8.geometry}
+        material={materials.deesc}
+        position={[0.845, -0.565, -0.245]}
+        rotation={[Math.PI / 2, 0, 0]}
+        scale={0.01}
+      />
       </a.group>
     );
 }
