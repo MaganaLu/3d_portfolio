@@ -2,9 +2,13 @@ import { Route, BrowserRouter as Router, Routes} from 'react-router-dom';
 import { Home, About, Projects } from './pages';
 import Navbar from './components/Navbar';
 
+
 const App = () => {
   return (
+
+
     <main className="bg-black">
+      
       <Router>
         <Navbar/>
         <Routes>

@@ -11,7 +11,10 @@ export default {
           'space': "url('/src/assets/images/space.jpg')",
           'brick-wall':"url('/src/assets/images/brickwall.jpg')",
           'PCScene':"url('/src/assets/images/PCScene.png')",
+          'PCSceneFlip':"url('/src/assets/images/PCSceneFlip.png')",
           'PCScene2':"url('src/assets/images/PCScene2.png')",
+          'TarascoLogo':"url('../assets/images/TarascoLogo.jpg')",
+          'SafiLog':"url('../assets/images/Safilog.PNG')"
         }),
 
         colors: {
