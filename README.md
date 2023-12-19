@@ -10,8 +10,8 @@ This was a project created for fun to learn and practice my react skills and tai
 
 Contributors names and contact info
 
-ex. Luis Magana 
-ex. [@LuisMagana](https://luismagana.work/)
+Luis Magana 
+[@LuisMagana](https://luismagana.work/)
 
 ## Version History
 * 0.1
