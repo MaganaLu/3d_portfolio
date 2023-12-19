@@ -2,8 +2,6 @@ import React from 'react'
 import tarascoLogo from '../assets/images/TarascoLogo.jpg';
 import SafiLog from '../assets/images/Safilog.png';
 import PythonReact from '../assets/images/pythonReact.jpg';
-import ButtonMailto from '../components/ButtonMailto';
-import HeadlineCards from '../components/HeadlineCards';
 
 function Projects() {
 

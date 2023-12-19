@@ -1,3 +1,7 @@
+/* eslint-disable react/no-unknown-property */
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import { a, animated } from '@react-spring/three'
@@ -5,8 +9,8 @@ import { a, animated } from '@react-spring/three'
 import eyeScene from '../assets/3d/RobotHead.glb'
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 
-const PigeonEyes = ({ isRotating, setIsRotating, setCurrentStage, currentFocusPoint, ...props }) => {
-  const eyeRef = useRef();
+export function PigeonEyes ({ currentFocusPoint, ...props }){
+  const eyesRef = useRef();
   const { gl, viewport } = useThree();
   const { nodes, materials } = useGLTF(eyeScene);
 
@@ -22,11 +26,10 @@ const PigeonEyes = ({ isRotating, setIsRotating, setCurrentStage, currentFocusPo
     mouseX = event.clientX;
     mouseY = event.clientY;
 
-    eyeRef.current.rotation.y = -2 + mouseX / window.innerWidth * 3;
-    console.log(mouseY);
+      eyesRef.current.rotation.y = -2 + mouseX / window.innerWidth * 3;
 
-    if (mouseY < 479) {
-      eyeRef.current.rotation.x = -1 + mouseY * 2.5 / window.innerHeight;
+      if (mouseY < window.innerHeight/2) {
+        eyesRef.current.rotation.x = -1 + mouseY * 2.5 / window.innerHeight;
     }
 
   }
@@ -44,7 +47,7 @@ const PigeonEyes = ({ isRotating, setIsRotating, setCurrentStage, currentFocusPo
 
 
   return (
-    <a.group ref={eyeRef} {...props}>
+      <a.group ref={eyesRef} {...props}>
       <mesh
         geometry={nodes.robot_rigHead_robot_rigM_Screen_0.geometry}
         material={materials.robot_rigM_Screen}
@@ -63,6 +66,4 @@ const PigeonEyes = ({ isRotating, setIsRotating, setCurrentStage, currentFocusPo
     </a.group>
   );
 }
-
-export default PigeonEyes;
 

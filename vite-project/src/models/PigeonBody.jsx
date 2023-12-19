@@ -1,3 +1,6 @@
+/* eslint-disable react/no-unknown-property */
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import { a, animated } from '@react-spring/three'
@@ -5,10 +8,11 @@ import { a, animated } from '@react-spring/three'
 import eyeScene from '../assets/3d/pigeonBody.glb'
 import { useFrame, useThree } from "@react-three/fiber";
 
-const PigeonBody = ({ isRotating, setIsRotating, setCurrentStage, currentFocusPoint, ...props }) => {
+export function PigeonBody ({ currentFocusPoint, ...props }) {
     const eyeRef = useRef();
     const { gl, viewport } = useThree();
     const { nodes, materials } = useGLTF(eyeScene);
+
 
     return (
         <a.group ref={eyeRef} {...props}>
@@ -18,33 +22,33 @@ const PigeonBody = ({ isRotating, setIsRotating, setCurrentStage, currentFocusPo
         scale={0.01}
       >
         <mesh
-          castShadow
-          receiveShadow
+          //castShadow
+          //receiveShadow
           geometry={nodes.Object_13.geometry}
           material={materials.pecho}
         />
         <mesh
-          castShadow
-          receiveShadow
+          //castShadow
+          //receiveShadow
           geometry={nodes.Object_14.geometry}
           material={materials.patas_y_pico}
         />
         <mesh
-          castShadow
-          receiveShadow
+          //castShadow
+          //receiveShadow
           geometry={nodes.Object_15.geometry}
           material={materials["deesc.001"]}
         />
         <mesh
-          castShadow
-          receiveShadow
+          //castShadow
+          //receiveShadow
           geometry={nodes.Object_16.geometry}
           material={materials.cuello}
         />
       </group>
       <mesh
-        castShadow
-        receiveShadow
+        //castShadow
+       // receiveShadow
         geometry={nodes.Object_8.geometry}
         material={materials.deesc}
         position={[0.845, -0.565, -0.245]}
@@ -55,7 +59,6 @@ const PigeonBody = ({ isRotating, setIsRotating, setCurrentStage, currentFocusPo
     );
 }
 
-export default PigeonBody;
 
 
 
